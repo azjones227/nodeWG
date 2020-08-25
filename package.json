@@ -1,0 +1,17 @@
+{
+  "name": "wg",
+  "version": "1.0.0",
+  "description": "node module to control wireguard",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "wireguard"
+  ],
+  "author": "Amos Jones",
+  "license": "ISC",
+  "dependencies": {
+    "ini": "^1.3.5"
+  }
+}
