@@ -3,15 +3,7 @@
 const { exec } = require("child_process")
 const fs = require('fs')
 
-
-	
-class peer {
-		this.publickey ="<<pubkey>>";
-		this.presharedkey = "optional";
-		this.allowedips =["0.0.0.0","::/0"];
-		this.endpoint = "192.167.27.50:51280";
-		this.persistentkeepalive = "0 to 65535";
-		}
+//class wireguard{}
 
 function shellrun(command){
 	exec(command,(error, stdout, stderr) =>{
