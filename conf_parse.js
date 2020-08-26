@@ -8,26 +8,43 @@ function getfileconf(data) {
 	let conf = {};
 	let lastsection = ''
 	data.forEach(function(value) {
+		console.log(value)
+		console.log(lastsection)
 		if (value.search(/\[(\w+)\]/i) === 0) {
-			if(conf[value.slice(0, value.length-1)]) && (Array.isArray(conf[value.slice(0, value.length-1)]) != true) {
-				conf[value.slice(0, value.length-1)] = toarray(conf[value.slice(0, value.length-1)])
+			console.log('found a section')
+			if(value.slice(1, value.length-1) === conf[lastsection] && Array.isArray(conf[lastsection]) != true) {
+				console.log('making an array')
+				conf[value.slice(1, value.length-1)] = toarray(conf[value.slice(0, value.length-1)])
 			} else {
-				conf[value.slice(0, value.length-1)] = {}
+				console.log('making a new section')
+				conf[value.slice(1, value.length-1)] = {}
 			}
 			if (lastsection != value.slice(0, (value.length-1))){
+				console.log('im changing the last used section')
 				lastsection = value.slice(0, (value.length-1))
+				console.log(lastsection)
 			}
+
 		} else if (value.search(/ = /i) != -1) {
 			let attribute = value.split(' = ')
-			conf[lastsection][attribute[0]] = attribute[1];
+
+			if (attribute[1].search(/, /i) != -1) {
+				console.log(attribute[1])
+			}
+
+		} else {
+			console.log('i have failed to place the data')
 		}
+		console.log(conf)
 	});
-	console.log(conf)
+	
 }
 
 function toarray(data) {
 	let temp = [];
 	temp.push(data);
+	console.log(temp);
 	return temp;
 }
+
 getfileconf(data);
