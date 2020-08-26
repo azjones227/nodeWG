@@ -3,20 +3,7 @@
 const { exec } = require("child_process")
 const fs = require('fs')
 
-class interface {
-		this.name = "wg0"
-		this.Address = "10.3.0.1";
-		this.DNS = "10.3.0.2";
-		this.MTU = optional;
-		this.Table = optional;
-		this.scripts = [
-			'PreUp = <<script>>',
-			'PostUp = <<script>>',
-			'PreDown = <<script>>',
-			'PostDown = <<script>>'
-			];
-		this.SaveConfig = false;
-	}
+
 	
 class peer {
 		this.publickey ="<<pubkey>>";
