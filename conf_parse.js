@@ -31,7 +31,7 @@ function getfileconf(data) {
 			if (attribute[1].search(/, /i) != -1) {
 				console.log(attribute[1])
 			}
-
+            conf[lastsection][attribute[0]] = attribute[1];
 		} else {
 			console.log('i have failed to place the data')
 		}
