@@ -2,67 +2,71 @@ const fs = require('fs')
 
 var data = fs.readFileSync('./test.conf','utf-8').split('\n');
 
-console.log(data)
+//console.log(data)
 
 function getfileconf(data) {
-	console.log('initialize conf & lastsection')
+	console.log('initialize conf & lastsection');
 	let conf = {};
-	let lastsection = ''
+	let currentsection = '';
 
-	data.forEach(function(value) {
-		console.log('this is the current value:' + value)
+	for(let i = 0; i < data.length; i++){
+		if (data[i].startsWith('[') === true){
+			console.log('found a section');
+			let name = data[i].slice(1, data[i].length-1);
 
-		if (value.search(/\[(\w+)\]/i) === 0) {
-			console.log('found a section, value.slice(1, value.length-1')
-			let section = value.slice(1, value.length-1);
-			console.log('this is the current section:' + section)
-
-			if(section === lastsection && Array.isArray(conf[lastsection]) != true) {
-				console.log('making an array, toarray(conf[section])')
-				conf[section] = toarray(conf[section])
-
-			} else {
-				console.log('adding a new section to conf')
-				conf[section] = {}
+			if(Array.isArray(conf[name]) === true) {
+				console.log('adding to existing array');
+				conf[name].push({});
+				currentsection = conf[name][conf[name].length-1];
 			}
 
-			if (lastsection != section){
-				console.log('changing the last used section, section > lastsection')
-				lastsection = section;
-				console.log(lastsection)
+			if(conf[name] && Array.isArray(conf[name]) === false) {
+				console.log('making an array on section ' +name)
+				conf[name] = toarray(conf[name])
+				conf[name].push({})
+				currentsection = conf[name][conf[name].length-1]
 			}
 
-		} else if (value.search(/ = /i) != -1) {
+			if(!conf[name]){
+				console.log('making a new section')
+				conf[name] = {}
+				currentsection = conf[name]
+			}
+			console.log(currentsection)
+
+		} else if(data[i] != '') {
 			console.log('found an attribute')
-			let attribute = value.split(' = ')
+			let attribute = data[i].split(' = ')
 			console.log('this is the attribute: ' + attribute[0])
 			console.log('this is the value: ' + attribute[1])
 
-			if (attribute[1].search(/\d\,\s/i) != -1){
-				console.log('this attribute has multiple values' + attribute[0])
-				attribute[1] = attribute[1].split(', ')
+			if(Array.isArray(currentsection[attribute[0]]) === true){
+				currentsection[attribute[0]].push(attribute[1])
 			}
 
-			if (Array.isArray(conf[lastsection]) === true) {
-				console.log('the destination is inside an array')
-				conf[lastsection][conf[lastsection].length-1][attribute[0]] = attribute[1] //The Problem: how to place data in a specific spot in an array without knowing the location
+			if(currentsection[attribute[0]] && Array.isArray(currentsection[attribute[0]]) === false){
+				currentsection[attribute[0]] = toarray(currentsection[attribute[0]]);
+				currentsection[attribute[0]].push(attribute[1])
+			}
 
-			} else {
-				console.log('the destination is stand alone')
-				conf[lastsection][attribute[0]] = attribute[1];
+			if(!currentsection[attribute[0]]){
+				currentsection[attribute[0]] = attribute[1]
 			}
 
 		} else {
-			console.log('i have failed to place the data')
+			console.log('encountered blank line')
 		}
-	});
-	console.log(conf)
+	}
+
+	console.log(conf);
 }
+
 
 function toarray(data) {
 	let temp = [];
 	temp.push(data);
 	return temp;
 }
+
 
 getfileconf(data);
