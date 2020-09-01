@@ -5,11 +5,12 @@ var data = fs.readFileSync('./test.conf','utf-8').split('\n');
 //console.log(data)
 
 function getfileconf(data) {
-	console.log('initialize conf & lastsection');
+	//console.log('initialize conf & lastsection');
 	let conf = {};
 	let currentsection = '';
 
 	for(let i = 0; i < data.length; i++){
+
 		if (data[i].startsWith('[') === true){
 			console.log('found a section');
 			let name = data[i].slice(1, data[i].length-1);
@@ -34,7 +35,11 @@ function getfileconf(data) {
 			}
 			console.log(currentsection)
 
-		} else if(data[i] != '') {
+		}
+
+		if(['#', '/'].includes(line[0])) continue;
+
+		if(data[i] != '') {
 			console.log('found an attribute')
 			let attribute = data[i].split(' = ')
 			console.log('this is the attribute: ' + attribute[0])
@@ -53,12 +58,13 @@ function getfileconf(data) {
 				currentsection[attribute[0]] = attribute[1]
 			}
 
-		} else {
+		} /*else {
 			console.log('encountered blank line')
-		}
+		}*/
 	}
 
 	console.log(conf);
+	return conf;
 }
 
 
@@ -68,5 +74,4 @@ function toarray(data) {
 	return temp;
 }
 
-
-getfileconf(data);
+test = getfileconf(data);

@@ -21,9 +21,21 @@ var data = { Interface:
        AllowedIPs: '172.24.0.4/32, 10.4.0.0/16' } ] }
 
 function writeFileConf(data) {
-		for(var key in data) {
-			console.log(key)
+	let output ='';
+	let count = 0;
+	for(var section in data) {
+		if (count < 0) {
+			output += '\n'
 		}
+
+		output += '[' + section + ']\n'
+
+		for(var item in data[section]) {
+			output += item + ' = ' + data[section][item] + '\n'
+		}
+		count++
+	}
+	console.log(output)
 }
 
 writeFileConf(data)
