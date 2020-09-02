@@ -28,14 +28,25 @@ function writeFileConf(data) {
 			output += '\n'
 		}
 
-		output += '[' + section + ']\n'
+		if(Array.isArray(data[section])) {
+			for (var i =0; i < data[section].length; i++) {
+				output += '[' + section + ']' + '\n'
+				for (item in data[section[i]]){
+					output += item + ' = ' + data[section][i][item]
+				}
+			}		
+		} else { output += '[' + section + ']\n' }
 
 		for(var item in data[section]) {
-			output += item + ' = ' + data[section][item] + '\n'
+			if (Array.isArray(data[section][item])){
+				for(var j = 0; j < data[section][item].length; j++) {
+					output += item + ' = ' + data[section][item][j] + '\n'
+				}
+
+			} else {output += item + ' = ' + data[section][item] + '\n'}
 		}
 		count++
 	}
 	console.log(output)
 }
-
 writeFileConf(data)
