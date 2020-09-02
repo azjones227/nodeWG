@@ -22,31 +22,46 @@ var data = { Interface:
 
 function writeFileConf(data) {
 	let output ='';
+	console.log('init output = \" \"')
 	let count = 0;
+	console.log('init count = 0')
+
 	for(var section in data) {
-		if (count < 0) {
+		console.log('entering first parse loop')
+		if (count > 0) {
+			console.log(count)
 			output += '\n'
 		}
 
 		if(Array.isArray(data[section])) {
-			for (var i =0; i < data[section].length; i++) {
-				output += '[' + section + ']' + '\n'
-				for (item in data[section[i]]){
-					output += item + ' = ' + data[section][i][item]
-				}
-			}		
-		} else { output += '[' + section + ']\n' }
+			console.log('entering array: ' + section )
+			for (i = 0; i < data[section].length; i++){
+				output += '\n'
+				output += '[' + section + ']\n'
+				output += sectionParse(data[section][i])
+			}
 
-		for(var item in data[section]) {
-			if (Array.isArray(data[section][item])){
-				for(var j = 0; j < data[section][item].length; j++) {
-					output += item + ' = ' + data[section][item][j] + '\n'
-				}
-
-			} else {output += item + ' = ' + data[section][item] + '\n'}
+		} else {
+			output += '[' + section + ']\n'
+			console.log('added new section heading' + section)
+					output += sectionParse(data[section])
 		}
 		count++
 	}
 	console.log(output)
 }
+
+function sectionParse(section){
+	result = ''
+	for(var item in section) {
+		if (Array.isArray(section[item])){
+			for(var j = 0; j < section[item].length; j++) {
+				result += item + ' = ' + section[item][j] + '\n'
+			}
+
+		} else {result += item + ' = ' + section[item] + '\n'}
+	}
+	return result;
+}
+
 writeFileConf(data)
