@@ -4,7 +4,7 @@ var data = fs.readFileSync('./test.conf','utf-8').split('\n');
 
 //console.log(data)
 
-function getfileconf(data) {
+function confRead(data) {
 	//console.log('initialize conf & lastsection');
 	let conf = {};
 	let currentsection = '';
@@ -74,4 +74,6 @@ function toarray(data) {
 	return temp;
 }
 
-test = getfileconf(data);
+//test = confRead(data);
+
+module.exports = confRead;

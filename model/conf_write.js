@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-var data = { Interface:
+/*var data = { Interface:
    { Address: '172.24.0.3/32',
      PrivateKey: '0JMSY0Rf9TsT9JAfM4/QMX8PvuNCejNUM0vUtJC6GHo=',
      ListenPort: '51820',
@@ -18,9 +18,9 @@ var data = { Interface:
        AllowedIPs: '172.24.0.1/32, 10.1.0.0/16' },
      { PublicKey: 'm7Ldqa+DaJj1sCt14vRwoBPCLuQ2GzFgu9CF6EU/GAg=',
        Endpoint: 'ron.theta42.com:51871',
-       AllowedIPs: '172.24.0.4/32, 10.4.0.0/16' } ] }
+       AllowedIPs: '172.24.0.4/32, 10.4.0.0/16' } ] }*/
 
-function writeFileConf(data) {
+function confWrite(data) {
 	let output ='';
 	console.log('init output = \" \"')
 	let count = 0;
@@ -28,10 +28,6 @@ function writeFileConf(data) {
 
 	for(var section in data) {
 		console.log('entering first parse loop')
-		if (count > 0) {
-			console.log(count)
-			output += '\n'
-		}
 
 		if(Array.isArray(data[section])) {
 			console.log('entering array: ' + section )
@@ -46,9 +42,9 @@ function writeFileConf(data) {
 			console.log('added new section heading' + section)
 					output += sectionParse(data[section])
 		}
-		count++
+		output +='\n'
 	}
-	console.log(output)
+	fs.writeFileSync('./test0.conf', output)
 }
 
 function sectionParse(section){
@@ -64,4 +60,6 @@ function sectionParse(section){
 	return result;
 }
 
-writeFileConf(data)
+//confWrite(data)
+
+module.exports = confWrite;
