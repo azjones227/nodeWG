@@ -2,18 +2,10 @@
 
 class wg_interface {
 	constructor(){
-		this.name = null;
-		this.address = null;
-		this.privatekey = null;
-		this.listenport = null;
-	}
-
-	set_name(name){
-		this.name = name;
-	}
-
-	get_name(){
-		return this.name;
+		this.name = 'null';
+		this.address = 'null';
+		this.privatekey = 'null';
+		this.listenport = 0;
 	}
 
 	set_address(address){
@@ -78,13 +70,21 @@ class wg_interface {
 	set_SaveConfig(bool){
 		if (bool != true && bool != false){
 			console.log('INVALID INPUT: true or false only')
-			break;
+			return;
 		}
 		this.SaveConfig = bool;
 	}
 
 	get_SaveConfig(){
 		return this.SaveConfig;
+	}
+
+	set_fwmark(mark){
+		this.fwmark = mark
+	}
+
+	get_fwmark(){
+		return this.fwmark
 	}
 }
 
