@@ -26,12 +26,12 @@ function confWrite(data) {
 	let count = 0;
 	console.log('init count = 0')
 
-	for(var section in data) {
+	for(let section in data) {
 		console.log('entering first parse loop')
 
 		if(Array.isArray(data[section])) {
 			console.log('entering array: ' + section )
-			for (i = 0; i < data[section].length; i++){
+			for (let i = 0; i < data[section].length; i++){
 				output += '\n'
 				output += '[' + section + ']\n'
 				output += sectionParse(data[section][i])
@@ -49,9 +49,9 @@ function confWrite(data) {
 
 function sectionParse(section){
 	result = ''
-	for(var item in section) {
+	for(let item in section) {
 		if (Array.isArray(section[item])){
-			for(var j = 0; j < section[item].length; j++) {
+			for(let j = 0; j < section[item].length; j++) {
 				result += item + ' = ' + section[item][j] + '\n'
 			}
 

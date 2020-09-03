@@ -1,0 +1,6 @@
+
+
+
+class wireguard {
+	constructor()
+}

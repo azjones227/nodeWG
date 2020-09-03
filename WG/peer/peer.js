@@ -2,10 +2,10 @@
 
 class peer {
 	constructor(){
-		this.publickey =null;
+		this.publickey ='null';
 		this.allowedips =[];
-		this.endpoint = null;
-		this.persistentkeepalive = null;
+		this.endpoint = 'null';
+		this.persistentkeepalive = 0;
 	}
 
 	set_pubkey(key){
