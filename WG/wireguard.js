@@ -10,7 +10,7 @@ class wireguard {
 	}
 
 	configureInterface(data){
-		for (item in data) {
+		for (let item in data) {
 			this.wg_interface[item] = data[item]
 		}
 	}
@@ -39,4 +39,4 @@ wg0 = new wireguard
 wg0.configureInterface(data)
 
 result = wg0.getInterface()
-console.log(result)
+console.log(wg0)

@@ -1,13 +1,13 @@
 const fs = require('fs')
 
-var data = fs.readFileSync('./test.conf','utf-8').split('\n');
 
 //console.log(data)
 
-function confRead(data) {
+function confRead(filename) {
 	//console.log('initialize conf & lastsection');
 	let conf = {};
 	let currentsection = '';
+	var data = fs.readFileSync(filename,'utf-8').split('\n');
 
 	for(let i = 0; i < data.length; i++){
 

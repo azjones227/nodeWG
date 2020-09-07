@@ -2,9 +2,9 @@
 
 class wg_interface {
 	constructor(){
-		this.address = 'null';
-		this.privatekey = 'null';
-		this.listenport = 0;
+		this.Address = 'null';
+		this.PrivateKey = 'null';
+		this.ListenPort = 0;
 	}
 
 	set_address(address){
