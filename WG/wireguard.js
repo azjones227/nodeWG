@@ -1,54 +1,22 @@
-var interface = require(./interface/interface)
-var peer = require(./peer/peer)
-var write = require(./conf/conf_write)
-var read = require(./conf/conf_read)
+var wg_interface = require('./wg_interface/wg_interface')
+var peer = require('./peer/peer')
+var write = require('./conf/conf_write')
+var read = require('./conf/conf_read')
 
 class wireguard {
 	constructor() {
-		this.interface = new interface
+		this.wg_interface = new wg_interface
 		this.peers = []
 	}
 
 	configureInterface(data){
-		for(let item in data) {
-			switch (item) {
-				case 'PrivateKey':
-					this.interface.set_privatekey(data[PrivateKey])
-
-				case 'ListenPort':
-					this.interface.set_listenport(data[ListenPort])
-
-				case 'FwMark':
-					this.interface.set_fwmark(data[FwMark])
-
-				case 'Address':
-					this.interface.set_address(data[address])
-
-				case 'DNS':
-					this.interface.set_dns(data[DNS])
-
-				case 'MTU':
-					this.interface.set_mtu(data[MTU])
-
-				case 'Table':
-					this.interface.set_table(data[Table])
-
-				case 'PreUp':
-				case 'PostUp':
-				case 'PreDown':
-				case 'PostDown':
-					this.interface.add_script(item, data[item])
-
-				case 'SaveConfig'
-					this.interface.set_saveconfig(data[SaveConfig])
-
-			}
+		for (item in data) {
+			this.wg_interface[item] = data[item]
 		}
-		return this;
 	}
 
 	getInterface(){
-		return this.interface;
+		return this.wg_interface;
 		//placeholder code
 	}
 
@@ -59,3 +27,16 @@ class wireguard {
 	}
 }
 
+data = { Address: '172.24.0.3/32',
+     PrivateKey: '0JMSY0Rf9TsT9JAfM4/QMX8PvuNCejNUM0vUtJC6GHo=',
+     ListenPort: '51820',
+     PostUp:
+      [ 'iptables -t nat -A POSTROUTING -m iprange --src-range 192.168.0.0-192.168.255.255 -o wg0 -j MASQUERADE',
+        'iptables -t nat -A POSTROUTING -m iprange --src-range 172.16.0.0-172.23.255.255 -o wg0 -j MASQUERADE',
+        'ip route add 10.0.0.0/8 dev wg0' ] }
+
+wg0 = new wireguard
+wg0.configureInterface(data)
+
+result = wg0.getInterface()
+console.log(result)

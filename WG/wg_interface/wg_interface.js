@@ -2,7 +2,6 @@
 
 class wg_interface {
 	constructor(){
-		this.name = 'null';
 		this.address = 'null';
 		this.privatekey = 'null';
 		this.listenport = 0;
