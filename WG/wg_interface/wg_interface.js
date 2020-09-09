@@ -1,6 +1,6 @@
 'use strict'
 
-class wg_interface {
+class Wg_interface {
 	constructor(){
 		this.Address = 'null';
 		this.PrivateKey = 'null';
@@ -87,4 +87,4 @@ class wg_interface {
 	}
 }
 
-module.exports = wg_interface;
+module.exports = Wg_interface;
