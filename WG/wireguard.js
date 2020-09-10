@@ -20,18 +20,22 @@ class Wireguard {
 		//placeholder code
 	}
 
-	createPeer(){
+	createPeer(p_data){
 		peer = new peer
-		configurePeer(p_data)
-		return peer;
+		configurePeer(peer, p_data)
 	}
 	
-
+	configurePeer(peer, p_data){
+		for (let item in p_data) {
+			peer[item] = p_data[item]
+		}
+		return peer;
+	}
 
 	addpeer(p_data){
 		//placeholder code
 		peer = createPeer(p_data)
-		this.peers.push()
+		this.peers.push(peer)
 	}
 }
 
