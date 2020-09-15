@@ -16,14 +16,14 @@ class Wireguard {
 	}
 
 	getPeer(pubkey){
-		this.conf.Peer.forEach(function(item, index, array) {
-			result = {}
-			//console.log(item)
-  			if (item['PublicKey'] === pubkey){
-  				console.log('found the key')
-  				result = item;
+		result = {}
+		for(let i = 0; i < this.conf.Peer.length; i++){
+			//console.log(this.conf.Peer[i])
+  			if (this.conf.Peer[i]['PublicKey'] === pubkey){
+  				//console.log('found the key')
+  				result = this.conf.Peer[i];
   			}
-		})
+		}
 		return result;
 	}
 }
