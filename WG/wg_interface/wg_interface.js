@@ -1,10 +1,11 @@
 'use strict'
 
 class Wg_interface {
-	constructor(){
+	constructor(i_data){
 		this.Address = 'null';
 		this.PrivateKey = 'null';
 		this.ListenPort = 0;
+		this.configureInterface(i_data)
 	}
 
 	set_address(address){
@@ -84,6 +85,12 @@ class Wg_interface {
 
 	get_fwmark(){
 		return this.fwmark
+	}
+
+	configureInterface(i_data){
+		for (let item in i_data) {
+			this.[item] = i_data[item]
+		}
 	}
 }
 

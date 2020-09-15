@@ -1,11 +1,12 @@
 'use strict'
 
 class peer {
-	constructor(){
+	constructor(p_data){
 		this.PublicKey ='null';
 		this.AllowedIPs =[];
 		this.Endpoint = 'null';
 		this.PersistentKeepalive = 0;
+		this.configurePeer(p_data)
 	}
 
 	set_pubkey(key){
@@ -38,6 +39,13 @@ class peer {
 
 	set_persistentkeepalive(time){
 		this.PersistentKeepalive = time;
+	}
+
+	configurePeer(p_data){
+		for (let item in p_data) {
+			peer[item] = p_data[item]
+		}
+		return peer;
 	}
 }
 
