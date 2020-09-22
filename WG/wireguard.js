@@ -41,7 +41,11 @@ class Wireguard {
 	editPeer(pubkey, p_data){
 		let target = this.getPeer(pubkey)
 		for(let item in p_data){
-			target[item] = p_data[item]
+			if (p_data[item]===null){
+				delete target[item];
+			} else {
+				target[item] = p_data[item]
+			}
 		}
 	}
 }
@@ -60,8 +64,7 @@ result = new Wireguard('test0')
 //console.log(getTest)
 
 //result.deletePeer('AsS7aikCUrXpdfSvwFnMs0yUaoQ7ZCkoUVOmNdl7NS8=')
-result.editPeer('AsS7aikCUrXpdfSvwFnMs0yUaoQ7ZCkoUVOmNdl7NS8=',{ PublicKey: 'm7Ldqa+DaJj1sCt14vRwoBPCLuQ2GzFgu9CF6EU/GAg=',
-       Endpoint: 'ron.theta42.com:51871',
-       AllowedIPs: '172.24.0.4/32, 10.4.0.0/16' })
+result.editPeer('m7Ldqa+DaJj1sCt14vRwoBPCLuQ2GzFgu9CF6EU/GAg=',{ Endpoint: null,
+       AllowedIPs: '172.24.0.4/32, 10.8.8.8/16' })
 
 console.log(result.conf.Peer)
