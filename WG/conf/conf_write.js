@@ -20,7 +20,7 @@ const fs = require('fs')
        Endpoint: 'ron.theta42.com:51871',
        AllowedIPs: '172.24.0.4/32, 10.4.0.0/16' } ] }*/
 
-function confWrite(data) {
+function confWrite(data, confFile) {
 	let output ='';
 	console.log('init output = \" \"')
 	let count = 0;
@@ -44,7 +44,7 @@ function confWrite(data) {
 		}
 		output +='\n'
 	}
-	fs.writeFileSync('./test0.conf', output)
+	fs.writeFileSync(confFile, output)
 }
 
 function sectionParse(section){

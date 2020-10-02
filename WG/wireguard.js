@@ -48,6 +48,20 @@ class Wireguard {
 			}
 		}
 	}
+
+	updateInterface(i_data){
+		for (let item in i_data){
+			if(i_data[item]===null){
+				delete this.conf.Interface[item]
+			} else {
+				this.conf.Interface[item] = i_data[item]
+			}
+		}
+	}
+
+	writeConfFile(){
+		write(this.conf, this.confFile)
+	}
 }
 
 //testing
@@ -56,7 +70,7 @@ result = new Wireguard('test0')
 //trying to access different variables
 //console.log(result.interface)
 //console.log(result.confFile)
-//console.log(result.conf.Interface.Address)
+console.log(result.conf.Interface)
 //console.log(result.conf.Peer)
 
 //testing peer functions
@@ -64,7 +78,16 @@ result = new Wireguard('test0')
 //console.log(getTest)
 
 //result.deletePeer('AsS7aikCUrXpdfSvwFnMs0yUaoQ7ZCkoUVOmNdl7NS8=')
-result.editPeer('m7Ldqa+DaJj1sCt14vRwoBPCLuQ2GzFgu9CF6EU/GAg=',{ Endpoint: null,
-       AllowedIPs: '172.24.0.4/32, 10.8.8.8/16' })
+//result.editPeer('m7Ldqa+DaJj1sCt14vRwoBPCLuQ2GzFgu9CF6EU/GAg=',{ Endpoint: null,
+       //AllowedIPs: '172.24.0.4/32, 10.8.8.8/16' })
 
-console.log(result.conf.Peer)
+//console.log(result.conf.Peer)
+
+/*result.updateInterface({ Address: '179.29.9.9/32',
+     PrivateKey: 'mynewprivatekey',
+     ListenPort: '99999',
+     PostUp: 'I changed this to prove a point' })*/
+
+//console.log(result.conf.Interface)
+
+
