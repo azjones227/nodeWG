@@ -70,7 +70,7 @@ result = new Wireguard('test0')
 //trying to access different variables
 //console.log(result.interface)
 //console.log(result.confFile)
-console.log(result.conf.Interface)
+//console.log(result.conf.Interface)
 //console.log(result.conf.Peer)
 
 //testing peer functions
@@ -90,4 +90,4 @@ console.log(result.conf.Interface)
 
 //console.log(result.conf.Interface)
 
-
+result.writeConfFile()
