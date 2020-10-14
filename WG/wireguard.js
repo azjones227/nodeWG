@@ -2,6 +2,9 @@
 //var peer = require('./peer/peer')
 var write = require('./conf/conf_write')
 var read = require('./conf/conf_read')
+const { exec } = require("child_process")
+const fs = require('fs')
+
 
 class Wireguard {
 	constructor(iface, confObj) {
@@ -62,6 +65,34 @@ class Wireguard {
 	writeConfFile(){
 		write(this.conf, this.confFile)
 	}
+
+	quickUp(){
+		exec(`wg-quick up ${this.iface}` ,(error, stdout, stderr) =>{
+			if (error) {
+				console.log(`error: ${error.message}`);
+				return;
+			}
+			if (stderr) {
+				console.log(`stderr: ${stderr}`);
+				return;
+			}
+			console.log(`stdout: ${stdout}`);
+		});
+	}
+
+	quickDown(){
+		exec(`wg-quick down ${this.iface}` ,(error, stdout, stderr) =>{
+			if (error) {
+				console.log(`error: ${error.message}`);
+				return;
+			}
+			if (stderr) {
+				console.log(`stderr: ${stderr}`);
+				return;
+			}
+			console.log(`stdout: ${stdout}`);
+		});
+	}
 }
 
 //testing
@@ -91,3 +122,7 @@ result = new Wireguard('test0')
 //console.log(result.conf.Interface)
 
 result.writeConfFile()
+
+result.quickUp()
+
+result.quickDown()

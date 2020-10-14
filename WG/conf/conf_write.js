@@ -20,11 +20,10 @@ const fs = require('fs')
        Endpoint: 'ron.theta42.com:51871',
        AllowedIPs: '172.24.0.4/32, 10.4.0.0/16' } ] }*/
 
+//The output file should apper in /etc/wireguard/{iface}.conf
 function confWrite(data, confFile) {
 	let output ='';
 	console.log('init output = \" \"')
-	let count = 0;
-	console.log('init count = 0')
 
 	for(let section in data) {
 		console.log('entering first parse loop')
