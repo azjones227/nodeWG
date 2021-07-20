@@ -67,7 +67,7 @@ class Wireguard {
 	}
 
 	quickUp(){
-		exec(`wg-quick up ${this.iface}` ,(error, stdout, stderr) =>{
+		exec(`wg-quick up ${this.interface}` ,(error, stdout, stderr) =>{
 			if (error) {
 				console.log(`error: ${error.message}`);
 				return;
@@ -81,7 +81,7 @@ class Wireguard {
 	}
 
 	quickDown(){
-		exec(`wg-quick down ${this.iface}` ,(error, stdout, stderr) =>{
+		exec(`wg-quick down ${this.interface}` ,(error, stdout, stderr) =>{
 			if (error) {
 				console.log(`error: ${error.message}`);
 				return;
