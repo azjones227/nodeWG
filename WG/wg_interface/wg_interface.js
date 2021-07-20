@@ -1,19 +1,11 @@
 'use strict'
 
-class wg_interface {
-	constructor(){
-		this.name = null;
-		this.address = null;
-		this.privatekey = null;
-		this.listenport = null;
-	}
-
-	set_name(name){
-		this.name = name;
-	}
-
-	get_name(){
-		return this.name;
+class Wg_interface {
+	constructor(i_data){
+		this.Address = 'null';
+		this.PrivateKey = 'null';
+		this.ListenPort = 0;
+		this.configureInterface(i_data)
 	}
 
 	set_address(address){
@@ -78,7 +70,7 @@ class wg_interface {
 	set_SaveConfig(bool){
 		if (bool != true && bool != false){
 			console.log('INVALID INPUT: true or false only')
-			break;
+			return;
 		}
 		this.SaveConfig = bool;
 	}
@@ -86,6 +78,20 @@ class wg_interface {
 	get_SaveConfig(){
 		return this.SaveConfig;
 	}
+
+	set_fwmark(mark){
+		this.fwmark = mark
+	}
+
+	get_fwmark(){
+		return this.fwmark
+	}
+
+	configureInterface(i_data){
+		for (let item in i_data) {
+			this.[item] = i_data[item]
+		}
+	}
 }
 
-module.exports = wg_interface;
+module.exports = Wg_interface;

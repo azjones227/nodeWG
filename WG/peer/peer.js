@@ -1,19 +1,20 @@
 'use strict'
 
 class peer {
-	constructor(){
-		this.publickey =null;
-		this.allowedips =[];
-		this.endpoint = null;
-		this.persistentkeepalive = null;
+	constructor(p_data){
+		this.PublicKey ='null';
+		this.AllowedIPs =[];
+		this.Endpoint = 'null';
+		this.PersistentKeepalive = 0;
+		this.configurePeer(p_data)
 	}
 
 	set_pubkey(key){
-		this.publickey = key;
+		this.PublicKey = key;
 	}
 
 	get_pubkey(){
-		return this.publickey;
+		return this.PublicKey;
 	}
 
 	set_presharedkey(pskey){
@@ -33,11 +34,18 @@ class peer {
 	}
 
 	set_endpoint(endpoint){
-		this.endpoint = endpoint;
+		this.Endpoint = endpoint;
 	}
 
 	set_persistentkeepalive(time){
-		this.persistentkeepalive = time;
+		this.PersistentKeepalive = time;
+	}
+
+	configurePeer(p_data){
+		for (let item in p_data) {
+			peer[item] = p_data[item]
+		}
+		return peer;
 	}
 }
 
